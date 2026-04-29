@@ -1,0 +1,2066 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+        <link rel="next" href="select_sql/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Introducción a SQL - Bases de datos</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#introduccion-completa-a-sql" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="." title="Bases de datos" class="md-header__button md-logo" aria-label="Bases de datos" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Bases de datos
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Introducción a SQL
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="Bases de datos" class="md-nav__button md-logo" aria-label="Bases de datos" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Bases de datos
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SQL
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    SQL
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción a SQL
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="." class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción a SQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#historia-y-evolucion-de-sql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Historia y Evolución de SQL
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lenguajes-principales-de-sql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lenguajes Principales de SQL
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Lenguajes Principales de SQL">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-ddl-data-definition-language" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. DDL — Data Definition Language
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-dcl-data-control-language" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. DCL — Data Control Language
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-dml-data-manipulation-language" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. DML — Data Manipulation Language
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-tcl-transaction-control-language" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. TCL — Transaction Control Language
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conceptos-basicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conceptos Básicos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Conceptos Básicos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bases-de-datos-relacionales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bases de Datos Relacionales
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tablas-filas-y-columnas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tablas, Filas y Columnas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#claves-y-relaciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Claves y Relaciones
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejemplos-practicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplos Prácticos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ejemplos Prácticos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-de-select-basico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo de SELECT Básico
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-de-join" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo de JOIN
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-de-insert" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo de INSERT
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-de-update" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo de UPDATE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-de-delete" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo de DELETE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-de-transaccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo de Transacción
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funciones-y-operadores-comunes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Funciones y Operadores Comunes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Funciones y Operadores Comunes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#funciones-agregadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Funciones Agregadas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#funciones-de-cadena" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Funciones de Cadena
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#funciones-de-fecha" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Funciones de Fecha
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operadores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operadores
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mejores-practicas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mejores Prácticas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sistemas-de-gestion-de-bases-de-datos-populares" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sistemas de Gestión de Bases de Datos Populares
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Sistemas de Gestión de Bases de Datos Populares">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mysql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MySQL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#postgresql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PostgreSQL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sql-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SQL Server
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#oracle-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Oracle Database
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sqlite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SQLite
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recursos-de-aprendizaje" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recursos de Aprendizaje
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Recursos de Aprendizaje">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tutoriales-interactivos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tutoriales Interactivos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#documentacion-oficial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Documentación Oficial
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comunidades" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comunidades
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#libros-recomendados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Libros Recomendados
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enlaces-relacionados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enlaces Relacionados
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Enlaces Relacionados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#todos-los-comandos-y-clausulas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Todos los comandos y cláusulas:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conclusión
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="select_sql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SELECT en SQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="operaciones_conjuntos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Operaciones de conjuntos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="clausulas_avanzadas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clausulas Avanzadas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="funciones/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Funciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="guia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guía
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#historia-y-evolucion-de-sql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Historia y Evolución de SQL
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lenguajes-principales-de-sql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lenguajes Principales de SQL
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Lenguajes Principales de SQL">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-ddl-data-definition-language" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. DDL — Data Definition Language
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-dcl-data-control-language" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. DCL — Data Control Language
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-dml-data-manipulation-language" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. DML — Data Manipulation Language
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-tcl-transaction-control-language" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. TCL — Transaction Control Language
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conceptos-basicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conceptos Básicos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Conceptos Básicos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bases-de-datos-relacionales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bases de Datos Relacionales
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tablas-filas-y-columnas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tablas, Filas y Columnas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#claves-y-relaciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Claves y Relaciones
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejemplos-practicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplos Prácticos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ejemplos Prácticos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-de-select-basico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo de SELECT Básico
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-de-join" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo de JOIN
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-de-insert" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo de INSERT
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-de-update" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo de UPDATE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-de-delete" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo de DELETE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-de-transaccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo de Transacción
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funciones-y-operadores-comunes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Funciones y Operadores Comunes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Funciones y Operadores Comunes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#funciones-agregadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Funciones Agregadas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#funciones-de-cadena" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Funciones de Cadena
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#funciones-de-fecha" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Funciones de Fecha
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operadores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operadores
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mejores-practicas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mejores Prácticas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sistemas-de-gestion-de-bases-de-datos-populares" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sistemas de Gestión de Bases de Datos Populares
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Sistemas de Gestión de Bases de Datos Populares">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mysql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MySQL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#postgresql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PostgreSQL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sql-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SQL Server
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#oracle-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Oracle Database
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sqlite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SQLite
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recursos-de-aprendizaje" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recursos de Aprendizaje
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Recursos de Aprendizaje">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tutoriales-interactivos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tutoriales Interactivos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#documentacion-oficial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Documentación Oficial
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comunidades" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comunidades
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#libros-recomendados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Libros Recomendados
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enlaces-relacionados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enlaces Relacionados
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Enlaces Relacionados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#todos-los-comandos-y-clausulas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Todos los comandos y cláusulas:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conclusión
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="introduccion-completa-a-sql">Introducción Completa a SQL</h1>
+<p>SQL (Structured Query Language) es el lenguaje estándar para trabajar con bases de datos relacionales.<br />
+Permite definir estructuras, gestionar permisos y manipular datos de manera eficiente y segura.</p>
+<p><img alt="Logo SQL" src="img/logo.png" /></p>
+<h2 id="historia-y-evolucion-de-sql">Historia y Evolución de SQL</h2>
+<p>SQL fue desarrollado en los años 70 por IBM como parte del proyecto System R. Se convirtió en un estándar ANSI en 1986 y ISO en 1987. Desde entonces, ha evolucionado con versiones como SQL-92, SQL:1999, SQL:2003, etc., incorporando características avanzadas como XML, JSON y funciones de ventana.</p>
+<p>Para más información histórica, visita <a href="https://es.wikipedia.org/wiki/SQL">la historia de SQL en Wikipedia</a>.</p>
+<h2 id="lenguajes-principales-de-sql">Lenguajes Principales de SQL</h2>
+<p>SQL se divide en varios sublenguajes según su función:</p>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Descripción</th>
+<th>Ejemplos de Comandos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DDL</td>
+<td>Data Definition Language - Define estructuras</td>
+<td>CREATE, ALTER, DROP</td>
+</tr>
+<tr>
+<td>DML</td>
+<td>Data Manipulation Language - Manipula datos</td>
+<td>SELECT, INSERT, UPDATE, DELETE</td>
+</tr>
+<tr>
+<td>DCL</td>
+<td>Data Control Language - Controla permisos</td>
+<td>GRANT, REVOKE</td>
+</tr>
+<tr>
+<td>TCL</td>
+<td>Transaction Control Language - Gestiona transacciones</td>
+<td>COMMIT, ROLLBACK, SAVEPOINT</td>
+</tr>
+</tbody>
+</table>
+<h3 id="1-ddl-data-definition-language">1. DDL — Data Definition Language</h3>
+<p>Se utiliza para crear y modificar objetos de la base de datos como tablas, índices y vistas.</p>
+<p>Ejemplos:
+- <code>CREATE TABLE</code> - Crea una nueva tabla
+- <code>ALTER TABLE</code> - Modifica una tabla existente
+- <code>DROP TABLE</code> - Elimina una tabla
+- <code>CREATE INDEX</code> - Crea un índice</p>
+<h3 id="2-dcl-data-control-language">2. DCL — Data Control Language</h3>
+<p>Controla permisos y autorizaciones de usuarios en la base de datos.</p>
+<p>Ejemplos:
+- <code>GRANT</code> - Otorga permisos
+- <code>REVOKE</code> - Revoca permisos</p>
+<h3 id="3-dml-data-manipulation-language">3. DML — Data Manipulation Language</h3>
+<p>Permite trabajar con los datos almacenados: consultar, insertar, modificar y eliminar.</p>
+<p>Ejemplos:
+- <code>SELECT</code> - Consulta datos
+- <code>INSERT</code> - Inserta nuevos datos
+- <code>UPDATE</code> - Modifica datos existentes
+- <code>DELETE</code> - Elimina datos</p>
+<h3 id="4-tcl-transaction-control-language">4. TCL — Transaction Control Language</h3>
+<p>Gestiona transacciones para asegurar la integridad de los datos.</p>
+<p>Ejemplos:
+- <code>COMMIT</code> - Confirma una transacción
+- <code>ROLLBACK</code> - Revierte una transacción
+- <code>SAVEPOINT</code> - Crea un punto de guardado</p>
+<h2 id="conceptos-basicos">Conceptos Básicos</h2>
+<h3 id="bases-de-datos-relacionales">Bases de Datos Relacionales</h3>
+<p>Una base de datos relacional organiza los datos en tablas relacionadas entre sí. Cada tabla tiene filas (registros) y columnas (campos).</p>
+<h3 id="tablas-filas-y-columnas">Tablas, Filas y Columnas</h3>
+<ul>
+<li><strong>Tabla</strong>: Estructura que contiene datos relacionados</li>
+<li><strong>Fila (Registro)</strong>: Una entrada individual en la tabla</li>
+<li><strong>Columna (Campo)</strong>: Un atributo de los datos</li>
+</ul>
+<p>Ejemplo de tabla <code>empleados</code>:</p>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>nombre</th>
+<th>apellido</th>
+<th>salario</th>
+<th>departamento_id</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Juan</td>
+<td>Pérez</td>
+<td>50000</td>
+<td>1</td>
+</tr>
+<tr>
+<td>2</td>
+<td>María</td>
+<td>García</td>
+<td>60000</td>
+<td>2</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Carlos</td>
+<td>López</td>
+<td>55000</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<h3 id="claves-y-relaciones">Claves y Relaciones</h3>
+<ul>
+<li><strong>Clave Primaria (Primary Key)</strong>: Identifica uniquely cada fila</li>
+<li><strong>Clave Foránea (Foreign Key)</strong>: Referencia a una clave primaria de otra tabla</li>
+<li><strong>Relaciones</strong>: Uno a uno, uno a muchos, muchos a muchos</li>
+</ul>
+<h2 id="ejemplos-practicos">Ejemplos Prácticos</h2>
+<h3 id="ejemplo-de-select-basico">Ejemplo de SELECT Básico</h3>
+<pre><code class="language-sql">SELECT nombre, salario
+FROM empleados
+WHERE salario &gt; 50000;
+</code></pre>
+<h3 id="ejemplo-de-join">Ejemplo de JOIN</h3>
+<pre><code class="language-sql">SELECT e.nombre, d.nombre_departamento
+FROM empleados e
+INNER JOIN departamentos d ON e.departamento_id = d.id;
+</code></pre>
+<h3 id="ejemplo-de-insert">Ejemplo de INSERT</h3>
+<pre><code class="language-sql">INSERT INTO productos (nombre, precio, categoria)
+VALUES ('Teclado Mecánico', 89.99, 'Periféricos');
+</code></pre>
+<h3 id="ejemplo-de-update">Ejemplo de UPDATE</h3>
+<pre><code class="language-sql">UPDATE empleados
+SET salario = salario * 1.05
+WHERE departamento_id = 1;
+</code></pre>
+<h3 id="ejemplo-de-delete">Ejemplo de DELETE</h3>
+<pre><code class="language-sql">DELETE FROM pedidos
+WHERE fecha &lt; '2024-01-01' AND estado = 'cancelado';
+</code></pre>
+<h3 id="ejemplo-de-transaccion">Ejemplo de Transacción</h3>
+<pre><code class="language-sql">BEGIN;
+UPDATE cuentas SET saldo = saldo - 100 WHERE id = 1;
+UPDATE cuentas SET saldo = saldo + 100 WHERE id = 2;
+COMMIT;
+</code></pre>
+<h2 id="funciones-y-operadores-comunes">Funciones y Operadores Comunes</h2>
+<h3 id="funciones-agregadas">Funciones Agregadas</h3>
+<ul>
+<li><code>COUNT()</code> - Cuenta filas</li>
+<li><code>SUM()</code> - Suma valores</li>
+<li><code>AVG()</code> - Promedio</li>
+<li><code>MIN()</code> - Valor mínimo</li>
+<li><code>MAX()</code> - Valor máximo</li>
+</ul>
+<h3 id="funciones-de-cadena">Funciones de Cadena</h3>
+<ul>
+<li><code>CONCAT()</code> - Concatena cadenas</li>
+<li><code>SUBSTRING()</code> - Extrae subcadena</li>
+<li><code>UPPER()</code> / <code>LOWER()</code> - Cambia mayúsculas/minúsculas</li>
+<li><code>LENGTH()</code> - Longitud de cadena</li>
+</ul>
+<h3 id="funciones-de-fecha">Funciones de Fecha</h3>
+<ul>
+<li><code>NOW()</code> - Fecha y hora actual</li>
+<li><code>DATE()</code> - Parte de fecha</li>
+<li><code>DATEDIFF()</code> - Diferencia entre fechas</li>
+</ul>
+<h3 id="operadores">Operadores</h3>
+<ul>
+<li>Aritméticos: <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code></li>
+<li>Comparación: <code>=</code>, <code>&lt;&gt;</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code></li>
+<li>Lógicos: <code>AND</code>, <code>OR</code>, <code>NOT</code></li>
+<li>Especiales: <code>LIKE</code>, <code>IN</code>, <code>BETWEEN</code>, <code>IS NULL</code></li>
+</ul>
+<h2 id="mejores-practicas">Mejores Prácticas</h2>
+<ol>
+<li><strong>Usa nombres descriptivos</strong>: Para tablas, columnas y variables</li>
+<li><strong>Normaliza tus datos</strong>: Evita redundancia</li>
+<li><strong>Usa índices apropiados</strong>: Para mejorar rendimiento</li>
+<li><strong>Valida datos</strong>: Con restricciones y triggers</li>
+<li><strong>Escribe consultas eficientes</strong>: Evita subconsultas innecesarias</li>
+<li><strong>Usa transacciones</strong>: Para operaciones críticas</li>
+<li><strong>Documenta tu código</strong>: Comentarios y documentación</li>
+</ol>
+<h2 id="sistemas-de-gestion-de-bases-de-datos-populares">Sistemas de Gestión de Bases de Datos Populares</h2>
+<h3 id="mysql">MySQL</h3>
+<ul>
+<li>Open source</li>
+<li>Rápido y confiable</li>
+<li>Ideal para web applications</li>
+<li><a href="https://dev.mysql.com/doc/">Documentación oficial</a></li>
+</ul>
+<h3 id="postgresql">PostgreSQL</h3>
+<ul>
+<li>Avanzado y extensible</li>
+<li>Soporte completo para SQL estándar</li>
+<li>Excelente para datos complejos</li>
+<li><a href="https://www.postgresql.org/docs/">Documentación oficial</a></li>
+</ul>
+<h3 id="sql-server">SQL Server</h3>
+<ul>
+<li>De Microsoft</li>
+<li>Integración con .NET</li>
+<li>Herramientas enterprise</li>
+<li><a href="https://docs.microsoft.com/en-us/sql/">Documentación oficial</a></li>
+</ul>
+<h3 id="oracle-database">Oracle Database</h3>
+<ul>
+<li>Enterprise-grade</li>
+<li>Alto rendimiento</li>
+<li>Características avanzadas</li>
+<li><a href="https://docs.oracle.com/en/database/">Documentación oficial</a></li>
+</ul>
+<h3 id="sqlite">SQLite</h3>
+<ul>
+<li>Ligero y embebido</li>
+<li>No requiere servidor</li>
+<li>Ideal para aplicaciones móviles</li>
+<li><a href="https://www.sqlite.org/docs.html">Documentación oficial</a></li>
+</ul>
+<h2 id="recursos-de-aprendizaje">Recursos de Aprendizaje</h2>
+<h3 id="tutoriales-interactivos">Tutoriales Interactivos</h3>
+<ul>
+<li><a href="https://sqlzoo.net/">SQLZoo</a> - Ejercicios prácticos</li>
+<li><a href="https://leetcode.com/problemset/database/">LeetCode Database</a> - Problemas de SQL</li>
+<li><a href="https://mode.com/sql-tutorial/">Mode Analytics</a> - Tutorial completo</li>
+</ul>
+<h3 id="documentacion-oficial">Documentación Oficial</h3>
+<ul>
+<li><a href="https://dev.mysql.com/doc/">MySQL Documentation</a></li>
+<li><a href="https://www.postgresql.org/docs/">PostgreSQL Documentation</a></li>
+<li><a href="https://docs.microsoft.com/en-us/sql/">SQL Server Documentation</a></li>
+</ul>
+<h3 id="comunidades">Comunidades</h3>
+<ul>
+<li><a href="https://stackoverflow.com/questions/tagged/sql">Stack Overflow SQL</a></li>
+<li><a href="https://www.reddit.com/r/SQL/">Reddit r/SQL</a></li>
+<li><a href="https://www.sqlservercentral.com/">SQL Server Central</a></li>
+</ul>
+<h3 id="libros-recomendados">Libros Recomendados</h3>
+<ul>
+<li>"SQL for Dummies" de Allen G. Taylor</li>
+<li>"Learning SQL" de Alan Beaulieu</li>
+<li>"SQL Performance Explained" de Markus Winand</li>
+</ul>
+<h2 id="enlaces-relacionados">Enlaces Relacionados</h2>
+<ul>
+<li><a href="./">Página principal del proyecto</a></li>
+<li><a href="operaciones_conjuntos/">Operaciones de conjuntos</a></li>
+<li><a href="clausulas_avanzadas/">Cláusulas avanzadas</a></li>
+<li><a href="funciones/">Funciones agregadas y escalares</a></li>
+<li><a href="guia/">Guía completa de uso de SQL</a></li>
+</ul>
+<h3 id="todos-los-comandos-y-clausulas">Todos los comandos y cláusulas:</h3>
+<table>
+<thead>
+<tr>
+<th>Comando / Cláusula</th>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SELECT</td>
+<td>DML</td>
+<td>Consulta datos de una o varias tablas</td>
+</tr>
+<tr>
+<td>DISTINCT</td>
+<td>DML</td>
+<td>Elimina filas duplicadas en los resultados</td>
+</tr>
+<tr>
+<td>FROM</td>
+<td>DML</td>
+<td>Indica la tabla o tablas a consultar</td>
+</tr>
+<tr>
+<td>WHERE</td>
+<td>DML</td>
+<td>Filtra filas según una condición</td>
+</tr>
+<tr>
+<td>GROUP BY</td>
+<td>DML</td>
+<td>Agrupa filas para usar funciones agregadas</td>
+</tr>
+<tr>
+<td>HAVING</td>
+<td>DML</td>
+<td>Filtra grupos después de agrupar</td>
+</tr>
+<tr>
+<td>ORDER BY</td>
+<td>DML</td>
+<td>Ordena los resultados (ASC/DESC)</td>
+</tr>
+<tr>
+<td>LIMIT</td>
+<td>DML</td>
+<td>Limita la cantidad de filas devueltas</td>
+</tr>
+<tr>
+<td>OFFSET</td>
+<td>DML</td>
+<td>Salta un número de filas antes de mostrar resultados</td>
+</tr>
+<tr>
+<td>INSERT</td>
+<td>DML</td>
+<td>Inserta nuevas filas en una tabla</td>
+</tr>
+<tr>
+<td>UPDATE</td>
+<td>DML</td>
+<td>Modifica filas existentes</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>DML</td>
+<td>Elimina filas</td>
+</tr>
+<tr>
+<td>CREATE</td>
+<td>DDL</td>
+<td>Crea tablas, vistas u otros objetos</td>
+</tr>
+<tr>
+<td>ALTER</td>
+<td>DDL</td>
+<td>Modifica estructuras existentes</td>
+</tr>
+<tr>
+<td>DROP</td>
+<td>DDL</td>
+<td>Elimina objetos de la base de datos</td>
+</tr>
+<tr>
+<td>UNION</td>
+<td>Set</td>
+<td>Une resultados eliminando duplicados</td>
+</tr>
+<tr>
+<td>UNION ALL</td>
+<td>Set</td>
+<td>Une resultados sin eliminar duplicados</td>
+</tr>
+<tr>
+<td>INTERSECT</td>
+<td>Set</td>
+<td>Devuelve filas comunes entre consultas</td>
+</tr>
+<tr>
+<td>EXCEPT</td>
+<td>Set</td>
+<td>Devuelve filas de la primera consulta que no están en la segunda</td>
+</tr>
+<tr>
+<td>INNER JOIN</td>
+<td>JOIN</td>
+<td>Devuelve coincidencias entre tablas</td>
+</tr>
+<tr>
+<td>LEFT JOIN</td>
+<td>JOIN</td>
+<td>Devuelve todas las filas de la tabla izquierda y coincidencias de la derecha</td>
+</tr>
+<tr>
+<td>RIGHT JOIN</td>
+<td>JOIN</td>
+<td>Devuelve todas las filas de la tabla derecha y coincidencias de la izquierda</td>
+</tr>
+<tr>
+<td>FULL JOIN</td>
+<td>JOIN</td>
+<td>Devuelve todas las filas cuando hay coincidencia en cualquiera de las tablas</td>
+</tr>
+<tr>
+<td>CROSS JOIN</td>
+<td>JOIN</td>
+<td>Producto cartesiano de tablas</td>
+</tr>
+<tr>
+<td>NATURAL JOIN</td>
+<td>JOIN</td>
+<td>Join basado en columnas con nombres iguales</td>
+</tr>
+<tr>
+<td>SELF JOIN</td>
+<td>JOIN</td>
+<td>Join de una tabla consigo misma</td>
+</tr>
+<tr>
+<td>CASE</td>
+<td>Expr</td>
+<td>Lógica condicional en consultas</td>
+</tr>
+<tr>
+<td>CAST</td>
+<td>Expr</td>
+<td>Convierte tipos de datos</td>
+</tr>
+<tr>
+<td>COALESCE</td>
+<td>Expr</td>
+<td>Devuelve el primer valor no nulo</td>
+</tr>
+<tr>
+<td>NULLIF</td>
+<td>Expr</td>
+<td>Devuelve NULL si dos expresiones son iguales</td>
+</tr>
+<tr>
+<td>EXTRACT</td>
+<td>Date</td>
+<td>Extrae parte de una fecha</td>
+</tr>
+<tr>
+<td>DATEADD</td>
+<td>Date</td>
+<td>Añade intervalo a fecha (SQL Server)</td>
+</tr>
+<tr>
+<td>DATE_PART</td>
+<td>Date</td>
+<td>Extrae parte de fecha (PostgreSQL)</td>
+</tr>
+<tr>
+<td>ROW_NUMBER</td>
+<td>Window</td>
+<td>Asigna números de fila</td>
+</tr>
+<tr>
+<td>RANK</td>
+<td>Window</td>
+<td>Asigna rangos</td>
+</tr>
+<tr>
+<td>DENSE_RANK</td>
+<td>Window</td>
+<td>Asigna rangos densos</td>
+</tr>
+<tr>
+<td>LAG</td>
+<td>Window</td>
+<td>Accede a fila anterior</td>
+</tr>
+<tr>
+<td>LEAD</td>
+<td>Window</td>
+<td>Accede a fila siguiente</td>
+</tr>
+<tr>
+<td>SUM OVER</td>
+<td>Window</td>
+<td>Suma acumulada</td>
+</tr>
+<tr>
+<td>AVG OVER</td>
+<td>Window</td>
+<td>Promedio móvil</td>
+</tr>
+<tr>
+<td>COUNT OVER</td>
+<td>Window</td>
+<td>Conteo en ventana</td>
+</tr>
+<tr>
+<td>WITH (CTE)</td>
+<td>CTE</td>
+<td>Expresiones de tabla comunes</td>
+</tr>
+<tr>
+<td>RECURSIVE</td>
+<td>CTE</td>
+<td>CTEs recursivas</td>
+</tr>
+<tr>
+<td>GRANT</td>
+<td>DCL</td>
+<td>Otorga permisos</td>
+</tr>
+<tr>
+<td>REVOKE</td>
+<td>DCL</td>
+<td>Revoca permisos</td>
+</tr>
+<tr>
+<td>COMMIT</td>
+<td>TCL</td>
+<td>Confirma transacción</td>
+</tr>
+<tr>
+<td>ROLLBACK</td>
+<td>TCL</td>
+<td>Revierte transacción</td>
+</tr>
+<tr>
+<td>SAVEPOINT</td>
+<td>TCL</td>
+<td>Punto de guardado en transacción</td>
+</tr>
+<tr>
+<td>BEGIN</td>
+<td>TCL</td>
+<td>Inicia transacción</td>
+</tr>
+<tr>
+<td>START TRANSACTION</td>
+<td>TCL</td>
+<td>Inicia transacción</td>
+</tr>
+<tr>
+<td>SET TRANSACTION</td>
+<td>TCL</td>
+<td>Establece propiedades de transacción</td>
+</tr>
+<tr>
+<td>CREATE VIEW</td>
+<td>DDL</td>
+<td>Crea vista</td>
+</tr>
+<tr>
+<td>CREATE INDEX</td>
+<td>DDL</td>
+<td>Crea índice</td>
+</tr>
+<tr>
+<td>CREATE TRIGGER</td>
+<td>DDL</td>
+<td>Crea trigger</td>
+</tr>
+<tr>
+<td>CREATE PROCEDURE</td>
+<td>DDL</td>
+<td>Crea procedimiento almacenado</td>
+</tr>
+<tr>
+<td>CREATE FUNCTION</td>
+<td>DDL</td>
+<td>Crea función</td>
+</tr>
+<tr>
+<td>ALTER TABLE</td>
+<td>DDL</td>
+<td>Modifica tabla</td>
+</tr>
+<tr>
+<td>ALTER VIEW</td>
+<td>DDL</td>
+<td>Modifica vista</td>
+</tr>
+<tr>
+<td>DROP TABLE</td>
+<td>DDL</td>
+<td>Elimina tabla</td>
+</tr>
+<tr>
+<td>DROP VIEW</td>
+<td>DDL</td>
+<td>Elimina vista</td>
+</tr>
+<tr>
+<td>DROP INDEX</td>
+<td>DDL</td>
+<td>Elimina índice</td>
+</tr>
+<tr>
+<td>TRUNCATE TABLE</td>
+<td>DDL</td>
+<td>Vacía tabla rápidamente</td>
+</tr>
+<tr>
+<td>COMMENT ON</td>
+<td>DDL</td>
+<td>Añade comentario a objeto</td>
+</tr>
+<tr>
+<td>ANALYZE</td>
+<td>Util</td>
+<td>Actualiza estadísticas (PostgreSQL)</td>
+</tr>
+<tr>
+<td>EXPLAIN</td>
+<td>Util</td>
+<td>Muestra plan de ejecución</td>
+</tr>
+<tr>
+<td>SHOW</td>
+<td>Util</td>
+<td>Muestra información del sistema (MySQL)</td>
+</tr>
+<tr>
+<td>DESCRIBE</td>
+<td>Util</td>
+<td>Describe estructura de tabla</td>
+</tr>
+<tr>
+<td>INFORMATION_SCHEMA</td>
+<td>Meta</td>
+<td>Vistas del sistema para metadatos</td>
+</tr>
+</tbody>
+</table>
+<h2 id="conclusion">Conclusión</h2>
+<p>SQL es fundamental para cualquier profesional que trabaje con datos. Desde consultas simples hasta análisis complejos, SQL proporciona las herramientas necesarias para gestionar información de manera efectiva. Comienza con los conceptos básicos y practica regularmente para dominar este poderoso lenguaje.</p>
+<p>¡Explora las páginas relacionadas para profundizar en temas específicos!</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": [], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
